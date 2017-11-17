@@ -9,8 +9,9 @@
 		<!-- /.col-lg-12 -->
 	</div>
 	<!-- /.row -->
+	<div class="row"><a class="btn btn-primary btn-mini pull-left" href="{{ route("enquirys.create") }}">Add New enquiry</a></div>
 	<div class="row">
-	<a class="btn btn-primary btn-mini pull-left" href="{{ route("enquirys.create") }}">Add New enquiry</a>
+	
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
