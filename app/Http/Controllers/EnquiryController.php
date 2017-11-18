@@ -59,7 +59,7 @@ class EnquiryController extends Controller {
 		$enquiry->name = $request->input("name");
 		$enquiry->age = $request->input("age");	
 		$enquiry->mumname = $request->input("mumname");
-				$enquiry->fatname = $request->input("fatname");
+		$enquiry->fatname = $request->input("fatname");
 		$enquiry->parentocc = $request->input("parentocc");
 		$enquiry->address = $request->input("address");
 		$enquiry->phone = $request->input("phone");
@@ -84,7 +84,8 @@ class EnquiryController extends Controller {
 		$enquiry->igcseothers = $request->input("igcseothers");
   		$enquiry->programinterested = $request->input("programinterested");
   		$enquiry->interview = $request->input("interview");
-  		$enquiry->compus = $request->input("compus");
+  		$enquiry->campus = $request->input("compus");
+  		$enquiry->remarks = $request->input("remarks");
 
 		
 		$enquiry->active = 0;
@@ -171,6 +172,8 @@ class EnquiryController extends Controller {
 		$enquiry->igcsebiology = $request->input("igcsebiology");
 		$enquiry->igcseothers = $request->input("igcseothers");
   		$enquiry->programinterested = $request->input("programinterested");
+  		$enquiry->campus = $request->input("campus");
+  		$enquiry->remarks = $request->input("remarks");
 
 
 		$enquiry->active = 0;

@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Mainslides;
+
 class WelcomeController extends Controller {
 
 	/*
@@ -30,7 +32,14 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('pages.welcome');
+			
+		$mainslides = Mainslides::where('active',1)
+		->orderBy('slideno','asc')
+		->take(10)
+		->get();
+		// echo "string";
+		// die();
+		return view('pages.welcome')->with('mainslides', $mainslides);
 	}
 
 }

@@ -55,6 +55,9 @@
                         <li>
                             <a href="/enquirys">enquiry information</a>
                         </li>
+                         <li>
+                            <a href="/mainslides">mainslide manager</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

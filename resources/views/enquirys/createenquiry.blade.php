@@ -246,8 +246,8 @@
         </div>
 
         <div class="form-group">
-        <label>Compus</label>
-          <select name="compus" lass="form-control">
+        <label>Campus</label>
+          <select name="campus" lass="form-control">
             <option>mict</option>
             <option>shwebonethar</option>
             <option>mandalay</option>
@@ -255,6 +255,16 @@
            
           </select>
         </div>
+
+         <div class="form-group">
+          <label>Remarks :</label>
+
+
+          <textarea name="remarks" placeholder="Enter remarks" class="form-control" rows="3"></textarea>
+
+        </div>
+
+
 
         <div class="form-group" style="display: none;">
           <input type="checkbox" name="active" value="1" checked>Active

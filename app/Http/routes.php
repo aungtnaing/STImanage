@@ -46,6 +46,8 @@ Route::controllers([
 
 			Route::group(['middleware' => 'roleware2'],function()
 			{
+				Route::resource('mainslides','MainslideController');
+
 			
 				Route::group(['middleware' => 'roleware'],function()
 				{

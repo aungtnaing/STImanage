@@ -9,7 +9,7 @@
             </div>
             <!-- /.row -->
             <div class="row">
-           
+           	<h1>Welcome to STI MYANMAR UNIVERSITY</h1>
                
             </div>
             

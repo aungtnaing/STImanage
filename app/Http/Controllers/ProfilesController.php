@@ -226,13 +226,21 @@ public function store(Request $request)
 	
 	$user->address = $request->input("address");
 	$user->ph1 = $request->input("ph1");
+		$user->ph2 = $request->input("ph2");
+
 	$user->email = $request->input("email");
 	if($request->input("password")!="")
 	{
 		$user->password = Hash::make($request->input("password"));
 	}
 	$user->photourl = $photourl;
+
+
 	$user->bio =  $request->input("bio");
+	$user->department =  $request->input("department");
+
+	$user->ranks =  $request->input("ranks");
+
 	$user->save();
 
 	return redirect()->action('HomeController@index');
@@ -291,86 +299,3 @@ public function store(Request $request)
 }
 
 
-
-// public function store(Request $request)
-// 	{
-// 		//
-// 		 $userid = $request->user()->id;
-//         $media = new Media;
-//         $mediaid = 0;
-//         $input = $request->all();
-
-// 	    if(array_key_exists('media', $input))
-//         {
-// 	        $image = Image::make($input['media']->getRealPath());
-
-// 	        $name =  time() . '-' . $request->user()->id . '.' . $input['media']->getClientOriginalExtension();
-// 	        $imagePath = public_path() . '/images/users/';
-// 	        $directory = $userid;
-
-// 	        // check if directory exists, if not create the directory
-// 	        $this->rrmdir($imagePath . $directory . '/profilePictures');
-
-// 	        $affectedRows = Media::where('userid', '=', $userid)->delete();
-
-// 	        File::exists($imagePath . $directory . '/profilePictures') or File::makeDirectory($imagePath . $directory . '/profilePictures', 0777, true, true);
-
-
-
-// 	        $image->save($imagePath . $directory . '/profilePictures/' . $name)
-// 	              ->fit(176, 176)
-// 	              ->save($imagePath . $directory . '/profilePictures/' . '176thumb-' . $name)
-// 	              ->fit(50, 50)
-// 	              ->save($imagePath . $directory . '/profilePictures/' . '50thumb-' . $name)
-// 	              ->fit(30, 30)
-// 	              ->save($imagePath . $directory . '/profilePictures/' . '30thumb-' . $name);
-// 	        // save to database
-// 	        $media->pathurl = $name;
-// 	        $media->mediatype = $input['media']->getMimeType();
-// 	        $media->userid = $userid;
-// 	        $media->save();
-// 	        $mediaid = $media->id;
-//         }       
-//         $user = User::find($userid);
-
-// 		if($mediaid!=0)$user->mediaid = $media->id;
-
-// 		$user->save();
-
-//         // return redirect()->route("profiles.show",$userid);
-//         // return redirect()->route()->back();	
-//         return redirect()->action('HomeController@index');
-// 	}
-
-
-
-// public function show($id)
-// 	{
-
-// 		echo $id;
-// 		die();
-
-// 			$media =DB::table('medias')
-//         			->select('medias.*')
-//         			->where('medias.userid','=',$id)
-//                     ->get(); 
-
-
-// 		$user = User::where('id','=',$id)->get();
-
-// 		// var_dump($media[0]);
-// 		// die();
-
-// 		if($media!=null)
-// 		{
-// 			return view('auth.profile')->with('oldmedia',$media[0])->with('user',$user[0]);
-// 		}
-// 		else
-// 		{
-// 			// echo "no";
-// 			$media = new Media();
-// 			$media->userid=0;
-
-// 			return view('auth.profile')->with('oldmedia',$media[0])->with('user',$user[0]);
-// 		}	
-// 	}

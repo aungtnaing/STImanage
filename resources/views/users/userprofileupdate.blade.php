@@ -77,6 +77,14 @@
             </div>
 
             <div class="form-group">
+               <label>Phone2:</label>
+               
+                <input class="form-control" name="ph2" value="{{ $user->ph2 }}" placeholder="Enter Your phone1" type="text">
+
+              
+            </div>
+
+            <div class="form-group">
               <label>Address:</label>
              
 
@@ -89,6 +97,28 @@
              
 
                 <textarea name="bio" placeholder="Enter your bio" class="form-control" rows="6">{{ $user->bio }}</textarea>
+              
+            </div>
+
+
+        <div class="form-group">
+        <label>Department</label>
+          <select name="campus" lass="form-control">
+            <option>admission</option>
+            <option>account</option>
+            <option>admin</option>
+            <option>teching</option>
+           <option>it</option>
+                      <option>other</option>
+
+          </select>
+        </div>
+
+          <div class="form-group">
+              <label>Ranks:</label>
+             
+
+                <textarea name="bio" placeholder="Enter your ranks" class="form-control" rows="6">{{ $user->ranks }}</textarea>
               
             </div>
 
