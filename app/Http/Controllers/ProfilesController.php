@@ -240,6 +240,9 @@ public function store(Request $request)
 	$user->department =  $request->input("department");
 
 	$user->ranks =  $request->input("ranks");
+	$user->workat =  $request->input("workat");
+
+
 
 	$user->save();
 

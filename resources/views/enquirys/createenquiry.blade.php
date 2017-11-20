@@ -251,8 +251,8 @@
             <option>mict</option>
             <option>shwebonethar</option>
             <option>mandalay</option>
-            <option>50th compus</option>
-           
+            <option>50th street campus</option>
+           <option>other</option>
           </select>
         </div>
 

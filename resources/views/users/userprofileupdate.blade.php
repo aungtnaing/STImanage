@@ -103,13 +103,22 @@
 
         <div class="form-group">
         <label>Department</label>
-          <select name="campus" lass="form-control">
-            <option>admission</option>
-            <option>account</option>
-            <option>admin</option>
-            <option>teching</option>
-           <option>it</option>
-                      <option>other</option>
+
+          <select name="department" lass="form-control">
+                              <option>{{ $user->department }}</option>
+
+            <option>Admin</option>
+            <option>Operation</option>
+            <option>Admission</option>
+            <option>Marketing</option>
+            <option>Account</option>
+
+           <option>IT</option>
+          <option>Planning</option>
+          <option>Program Coordination</option>
+          <option>Other</option>
+
+
 
           </select>
         </div>
@@ -121,6 +130,23 @@
                 <textarea name="bio" placeholder="Enter your ranks" class="form-control" rows="6">{{ $user->ranks }}</textarea>
               
             </div>
+
+
+
+            <div class="form-group">
+        <label>Work at</label>
+          <select name="workat" lass="form-control">
+                              <option>{{ $user->workat }}</option>
+
+            <option>mict</option>
+            <option>shwebonethar</option>
+            <option>mandalay</option>
+            <option>50th street campus</option>
+            <option>insein</option>
+           <option>other</option>
+          </select>
+        </div>
+
 
             <div class="form-group">
               <label>Password:</label>
