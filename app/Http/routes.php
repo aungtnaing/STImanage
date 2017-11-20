@@ -24,6 +24,7 @@ Route::controllers([
 
 	Route::group(['middleware' => 'auth'],function()
 	{
+					Route::resource('todolists','TodolistController');
 
 							
 		Route::group(['middleware' => 'rolewaredashboard'],function()
@@ -51,7 +52,10 @@ Route::controllers([
 			
 				Route::group(['middleware' => 'roleware'],function()
 				{
-					Route::resource('userspannel','UserspannelController');			
+					Route::resource('userspannel','UserspannelController');	
+						Route::get('todolistmanager', [
+					'uses' => 'TodolistController@todolistmanager'
+					]);		
 				});
 
 			});

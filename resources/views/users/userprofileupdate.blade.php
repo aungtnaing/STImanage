@@ -123,14 +123,14 @@
           </select>
         </div>
 
-          <div class="form-group">
-              <label>Ranks:</label>
-             
+      
+              <div class="form-group">
+               <label>Ranks:</label>
+               
+                <input class="form-control" name="ranks" value="{{ $user->ranks }}" placeholder="Enter Your rank" type="text">
 
-                <textarea name="bio" placeholder="Enter your ranks" class="form-control" rows="6">{{ $user->ranks }}</textarea>
               
             </div>
-
 
 
             <div class="form-group">

@@ -46,18 +46,31 @@
                             </div> -->
                             <!-- /input-group -->
                         </li>
+
+                             @if(Auth::user()->roleid==2 || Auth::user()->roleid==3 || Auth::user()->roleid==4 || Auth::user()->roleid==1)
+
                         <li>
                             <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="/userspannel">user manager</a>
-                        </li>
-                        <li>
+                             <li>
                             <a href="/enquirys">enquiry information</a>
                         </li>
                          <li>
                             <a href="/mainslides">mainslide manager</a>
                         </li>
+                        </li>
+                        @endif
+                          @if(Auth::user()->roleid==1)
+                        <li>
+                            <a href="/userspannel">user manager</a>
+                        </li>
+                         <li>
+                            <a href="/todolistmanager">todolist manager</a>
+                        </li>
+                        @endif
+                        <li>
+                            <a href="/todolists">your todolist</a>
+                        </li>
+                       
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

@@ -34,7 +34,7 @@
 								<th>Phone</th>
 								<th>Interested</th>
 								<th>Interviewer</th>
-								<th>Compus</th>
+								<th>Campus</th>
 								<th>Date</th>
 								<th></th>
 								<th></th>

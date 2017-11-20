@@ -5,7 +5,7 @@
 <div id="content">
 	<div id="content-header">
 		<!-- <div id="breadcrumb"> <a href="{{ url('/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">edit mainslie</a> </div> -->
-		<h3>MAINSLIDE</h3>
+		<h3>TODOLIST</h3>
 
 	</div>
 	<div class="container-fluid">
@@ -26,82 +26,49 @@
 		<div class="span12">
 				<div class="widget-box">
 					<div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-						<h5>Mainslide-infoe</h5>
+						<h5>todolist-info</h5>
 					</div>
 					<div class="widget-content">
 
-					<form action="{{ route("mainslides.update", $mainslide->id) }}" method="POST" enctype="multipart/form-data">
+					<form action="{{ route("todolists.update", $todolist->id) }}" method="POST" enctype="multipart/form-data">
 							<input name="_method" type="hidden" value="PATCH">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							
 
-								<ul class="thumbnails">
-									<li class="span3"> <a> 
-										<input style="display:none;" id="file-input1" name="photourl1" type='file' onchange="readURL(this);"/>                    
-										<label for="file-input1">
-											<i class="icon-camera"></i>.Main 1539x732<br>
-											@if($mainslide->photourl1!="")
-											<img id="blah" src= "{{ $mainslide->photourl1 }}" width="100" height="100">
-											@else
-											<img id="blah" src="//placehold.it/100" alt="avatar" alt="your image" />
-											@endif
-										</label>
-										<div class="actions"><a id="preview1" class="lightbox_trigger" herf=""><i class="icon-search"></i></a> </div>
-
-									</li>
-									
-									<li class="span3"> <a> 
-										<input style="display:none;" id="file-input2" name="photourl2" type='file' onchange="readURL1(this);"/>                    
-										<label for="file-input2">
-											<i class="icon-camera"></i>.Thum 250x220<br>
-											@if($mainslide->photourl2!="")
-											<img id="blah1" src= "{{ $mainslide->photourl2 }}" width="100" height="100">
-											@else
-											<img id="blah1" src="//placehold.it/100" alt="avatar" alt="your image" />
-											@endif
-										</label>
-										<div class="actions"><a id="preview1" class="lightbox_trigger" herf=""><i class="icon-search"></i></a> </div>
-
-									</li>
-
-								</ul>
+								
 
 							
 
 									<div class="form-group">
-         <label>Title :</label>
+         <label>Task :</label>
 
-            <input type="text" class="form-control" name="title" placeholder="Enter title" value="{{ $mainslide->title }}">
+            <input type="text" class="form-control" name="title" placeholder="Enter task" value="{{ $todolist->title }}">
             </div>
           
 
-          <div class="form-group">
-            <label>Sub Title :</label>
-
-            <input type="text" class="form-control" value="{{ $mainslide->stitle }}" name="stitle" placeholder="Enter stitle">
-            
-          </div> 
+         
 
 
         <div class="form-group">
           <label>Description :</label>
 
 
-          <textarea name="description" placeholder="Enter your description" class="form-control" rows="3">{{ $mainslide->description }}</textarea>
+          <textarea name="description" placeholder="Enter your description" class="form-control" rows="3">{{ $todolist->description }}</textarea>
 
         </div>
-
-        <div class="form-group">
-									<label>Slide No</label>
-
-								
-			<input name="slideno" value="{{ $mainslide->slideno }}" type="number" onkeypress="return isNumberKey(event)"/>
-
+        		<div class="form-group">
+									
+									@if($todolist->done==0)
+									<input type="checkbox" name="done" value="">Done<br>  
+									@else   
+									<input type="checkbox" name="done" value="" checked>Done<br>
+									@endif
 								</div>
+
 
 								<div class="form-group">
 									
-									@if($mainslide->active==0)
+									@if($todolist->active==0)
 									<input type="checkbox" name="active" value="">Active<br>  
 									@else   
 									<input type="checkbox" name="active" value="" checked>Active<br>
