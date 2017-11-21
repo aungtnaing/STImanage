@@ -79,7 +79,8 @@ class TodolistController extends Controller {
 		$todolist->description = $request->input("description");
 
 				$todolist->userid = $request->user()->id;
-			
+		$todolist->tdate = $request->input("tdate");
+		$todolist->status = $request->input("status");	
 		$todolist->done = 0;
 		if (Input::get('done') === '1'){$todolist->done = 1;}
 
@@ -136,7 +137,8 @@ class TodolistController extends Controller {
 
 		$todolist = Todolists::find($id);
 			
-		
+			$todolist->tdate = $request->input("tdate");
+		$todolist->status = $request->input("status");	
 	
 		$todolist->title = $request->input("title");
 

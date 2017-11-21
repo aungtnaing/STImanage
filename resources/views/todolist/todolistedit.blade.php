@@ -56,6 +56,22 @@
           <textarea name="description" placeholder="Enter your description" class="form-control" rows="3">{{ $todolist->description }}</textarea>
 
         </div>
+
+
+			<div class="form-group">
+         <label>Task Date :</label>
+
+            <input type="text" class="form-control" name="tdate" placeholder="Enter your task date" value="{{ $todolist->tdate }}">
+            </div>
+
+
+			<div class="form-group">
+         <label>Status (work done %):</label>
+
+            <input type="text" class="form-control" name="status" placeholder="Enter your work done status" value="{{ $todolist->status }}">
+            </div>
+
+
         		<div class="form-group">
 									
 									@if($todolist->done==0)

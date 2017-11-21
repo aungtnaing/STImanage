@@ -21,10 +21,12 @@ class CreateTodolistsTable extends Migration {
 			$table->integer('userid');
 
 			$table->string('description', 10000);
-			
+			$table->string('tdate');
+			$table->string('status',1000);
+
 			$table->boolean('done');
 
-		
+			
 			$table->boolean('active');
 			
 

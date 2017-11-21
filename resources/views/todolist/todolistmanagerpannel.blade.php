@@ -25,6 +25,8 @@
 									<th>id</th>
 									<th>Task</th>					
 									<th>Description</th>
+									<th>Date</th>
+									<th>Status</th>
 									<th>By</th>
 									<th>Done</th>
 									<th>active</th>
@@ -44,6 +46,8 @@
 									<td>{{ $todolist->title }}</td>
 									
 									<td>{{ $todolist->description }}</td>
+									<td>{{ $todolist->tdate }}</td>
+									<td>{{ $todolist->status }}</td>
 									<td>{{ $todolist->user->name }} <br> {{ $todolist->user->department }} / {{ $todolist->user->ranks }}</td>
 
 									@if($todolist->done==1)

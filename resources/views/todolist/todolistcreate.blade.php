@@ -48,6 +48,20 @@
 
         </div>
 
+
+			<div class="form-group">
+         <label>Task Date :</label>
+
+            <input type="text" class="form-control" name="tdate" placeholder="Enter your task date" value="{{ old('tdate') }}">
+            </div>
+
+
+			<div class="form-group">
+         <label>Status (work done %):</label>
+
+            <input type="text" class="form-control" name="status" placeholder="Enter your work done status" value="{{ old('status') }}">
+            </div>
+
      		 <div class="form-group">
           <input type="checkbox" name="done" value="1" checked>Done
         </div>

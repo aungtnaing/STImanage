@@ -26,6 +26,8 @@
 									<th>id</th>
 									<th>Task</th>					
 									<th>Description</th>
+									<th>Date</th>
+									<th>Status</th>
 									<th>Done</th>
 									<th>active</th>
 
@@ -44,7 +46,8 @@
 									<td>{{ $todolist->title }}</td>
 									
 									<td>{{ $todolist->description }}</td>
-								
+									<td>{{ $todolist->tdate }}</td>
+									<td>{{ $todolist->status }}</td>
 									@if($todolist->done==1)
 									<td><i class="fa fa-check"></i></td>
 									@else
