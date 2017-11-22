@@ -92,9 +92,9 @@
                   <option value="{{ $user->roleid }}">User</option>
                   @endif
                   <option value="1">1 : Admin</option>
-                  <option value="2">2 : Supevisor</option>
-                  <option value="3">3 : Operator</option>
-                  <option value="4">4 : Operator</option>
+                  <option value="2">2 : Manager</option>
+                  <option value="3">3 : Admission Manager</option>
+                  <option value="4">4 : Campus Manager</option>
                   <option value="5">5 : Staff</option>
              
                   <option value="0">0 : User</option>
