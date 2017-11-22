@@ -24,7 +24,7 @@ Route::controllers([
 
 	Route::group(['middleware' => 'auth'],function()
 	{
-					Route::resource('todolists','TodolistController');
+		Route::resource('todolists','TodolistController');
 
 							
 		Route::group(['middleware' => 'rolewaredashboard'],function()
@@ -40,27 +40,32 @@ Route::controllers([
 
 		Route::resource('profiles','ProfilesController');
 
-		Route::group(['middleware' => 'roleware3_4'],function()
+		Route::group(['middleware' => 'roleware3'],function()
 		{
 			
 			Route::resource('enquirys','EnquiryController');
-
-			Route::group(['middleware' => 'roleware2'],function()
-			{
-				Route::resource('mainslides','MainslideController');
+			Route::resource('mainslides','MainslideController');
 
 			
-				Route::group(['middleware' => 'roleware'],function()
-				{
-					Route::resource('userspannel','UserspannelController');	
+			
+		});
+
+		Route::group(['middleware' => 'roleware2'],function()
+			{
+
+				Route::resource('userspannel','UserspannelController');	
 						Route::get('todolistmanager', [
 					'uses' => 'TodolistController@todolistmanager'
 					]);		
-				});
+				
 
 			});
-			
-		});
+
+
+		Route::group(['middleware' => 'roleware'],function()
+				{
+					
+				});
 
 
 

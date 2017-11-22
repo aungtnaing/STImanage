@@ -4,7 +4,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
 
-class Manageuserswarerole3_4 {
+class Manageuserswarerole3 {
 
 	
 	/**
@@ -39,7 +39,7 @@ class Manageuserswarerole3_4 {
 	{
 		
 
-		if ($request->user()->roleid==3 || $request->user()->roleid==4 || $request->user()->roleid==2)
+		if ($request->user()->roleid==3 || $request->user()->roleid==2)
 		{
 
 			return $next($request);

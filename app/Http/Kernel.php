@@ -30,7 +30,9 @@ class Kernel extends HttpKernel {
 			'rolewaredashboard' => 'App\Http\Middleware\Managedashboard',
 		'roleware6' => 'App\Http\Middleware\Manageuserswarerole6',
 		'roleware5' => 'App\Http\Middleware\Manageuserswarerole5',
-		'roleware3_4' => 'App\Http\Middleware\Manageuserswarerole3_4',
+		'roleware3' => 'App\Http\Middleware\Manageuserswarerole3',
+		'roleware4' => 'App\Http\Middleware\Manageuserswarerole4',
+
 		'roleware2' => 'App\Http\Middleware\Manageuserswarerole2',
 		'roleware' => 'App\Http\Middleware\Manageusersware',
 	];

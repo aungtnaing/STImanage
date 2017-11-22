@@ -44,12 +44,12 @@
 								@if($user->roleid==1)
 								<td>Admin</td>
 								@elseif($user->roleid==2)
-								<td>Supevisor</td>
+								<td>Manager</td>
 								@elseif($user->roleid==3)
-								<td>Operator</td>
+								<td>Admission Manager</td>
 								@elseif($user->roleid==4)
-								<td>Operator</td>
-								@elseif($user->roleid==5)
+								<td>Campus Manager</td>
+								@elseif($user->roleid==10)
 								<td>Staff</td>
 
 								@else

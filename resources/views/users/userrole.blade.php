@@ -80,11 +80,11 @@
                   @if($user->roleid==1)
                   <option value="{{ $user->roleid }}">1 : Admin</option>
                   @elseif($user->roleid==2)
-                  <option value="{{ $user->roleid }}">2 : Supevisor</option>
+                  <option value="{{ $user->roleid }}">2 : Manager</option>
                   @elseif($user->roleid==3)
-                   <option value="{{ $user->roleid }}">3 : Operator</option>
+                   <option value="{{ $user->roleid }}">3 : Admission Manager</option>
                   @elseif($user->roleid==4)
-                  <option value="{{ $user->roleid }}">4 : Operator</option>
+                  <option value="{{ $user->roleid }}">4 : Campus Manager</option>
                   @elseif($user->roleid==5)
                   <option value="{{ $user->roleid }}">5 : Staff</option>
                  
