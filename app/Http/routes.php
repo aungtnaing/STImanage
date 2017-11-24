@@ -50,6 +50,15 @@ Route::controllers([
 			
 		});
 
+			Route::group(['middleware' => 'roleware4'],function()
+		{
+			
+			Route::resource('campus','CampusController');
+		
+			
+			
+		});
+
 		Route::group(['middleware' => 'roleware2'],function()
 			{
 

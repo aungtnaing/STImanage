@@ -90,7 +90,7 @@
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> Campus Management<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                <li>
-                            <a href="/enquirys">campus information</a>
+                            <a href="/campus">campus information</a>
                         </li>
                          <li>
                             <a href="/mainslides">campus manager</a>

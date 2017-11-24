@@ -55,6 +55,7 @@ class EnquiryController extends Controller {
 
 		$enquiry = new Enquirys();
 				
+						$enquiry->userid = $request->user()->id;
 
 		$enquiry->name = $request->input("name");
 		$enquiry->age = $request->input("age");	
@@ -144,7 +145,8 @@ class EnquiryController extends Controller {
 		
 		$enquiry = Enquirys::find($id);
 			
-	
+								$enquiry->userid = $request->user()->id;
+
 		$enquiry->name = $request->input("name");
 		$enquiry->age = $request->input("age");	
 		$enquiry->mumname = $request->input("mumname");

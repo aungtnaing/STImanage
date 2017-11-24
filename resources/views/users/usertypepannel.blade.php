@@ -28,7 +28,7 @@
 								<th>Role</th>
 								<th>Ph1</th>
 								<th>Address</th>
-								<th>Fb</th>
+								<th>Department</th>
 								<th></th>
 								<th></th>
 								
@@ -58,7 +58,7 @@
 								<td>{{ $user->ph1 }}</td>
 								<!-- <td>{{ $user->ph2 }}</td> -->
 								<td>{{ $user->address }}</td>
-								<td>{{ $user->fburl }}</td>
+								<td>{{ $user->department }}/{{ $user->ranks }}</td>
 								<td><a class="btn btn-mini btn-info" href="{{ route("profiles.show", $user->id ) }}">Role</a></td>
 								@if(Auth::user()->roleid==1)
 
