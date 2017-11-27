@@ -92,9 +92,11 @@
                                <li>
                             <a href="/campus">campus information</a>
                         </li>
+                         @if(Auth::user()->roleid==1)
                          <li>
-                            <a href="/mainslides">campus manager</a>
+                            <a href="/campusitem">campus manager</a>
                         </li>
+                        @endif
                         
                             </ul>
                             <!-- /.nav-second-level -->

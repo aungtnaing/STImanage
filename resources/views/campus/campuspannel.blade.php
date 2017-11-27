@@ -32,7 +32,7 @@
 									<th>condition</th>
 									<th>available</th>
 									<th>active</th>
-
+									
 									<th></th>
 									<th></th>
 								
@@ -61,6 +61,7 @@
 									@else
 									<td></td>
 									@endif
+									
 									<td>
 										<a class="btn btn-mini btn-primary" href="{{ route("campus.edit", $campu->id ) }}">Edit</a>
 									</td>

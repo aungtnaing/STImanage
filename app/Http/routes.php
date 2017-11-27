@@ -55,7 +55,14 @@ Route::controllers([
 			
 			Route::resource('campus','CampusController');
 		
+			Route::resource('campusitem','CampusitemController');
+
+
+		Route::get('campusitemcreate/{campusid}', ['as' => 'campusitemcreate', function ($campusid) {
+			return view("campusitem.campusitemcreate")->with('campusid', $campusid);
 			
+		}]);
+
 			
 		});
 

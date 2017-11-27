@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Campus;
+use App\Campusitem;
 use DB;
 
 use File;
@@ -156,9 +157,11 @@ class CampusController extends Controller {
 	public function edit($id)
 	{
 		//
-		
+		$campusitems = Campusitem::where('campusid','=',$id)->get();
+
 		$campu = Campus::find($id);
-		return view('campus.campusedit')->with('campu',$campu);
+		return view('campus.campusedit')->with('campu',$campu)
+										->with('campusitems', $campusitems);
 	}
 
 	/**
