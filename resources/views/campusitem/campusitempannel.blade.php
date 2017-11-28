@@ -24,9 +24,9 @@
 									<th>id</th>
 									<th>Campus</th>
 									<th>Campus</th>
-									<th>Action</th>					
-									<th>Action Date</th>
-									<th>Actions</th>
+									<th>Issue</th>					
+									<th>Issue Date</th>
+									<th>Issues</th>
 									<th>Staff</th>
 									<th>active</th>
 

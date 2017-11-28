@@ -4,7 +4,7 @@
 <div id="content">
 	<div id="content-header">
 		<!-- <div id="breadcrumb"> <a href="{{ url('/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">new mainslie</a> </div> -->
-		<h3>Campus action</h3>
+		<h3>Campus Issues</h3>
 	</div>
 	<div class="container-fluid">
 		<hr>
@@ -22,7 +22,7 @@
 				@endif	
 				<div class="widget-box">
 					<div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-						<h5>Campus-info</h5>
+						<h5>Campus new issue-info</h5>
 					</div>
 					<div class="widget-content nopadding">
 						<form action="{{ route("campusitem.store") }}" method="POST" enctype="multipart/form-data">
@@ -31,7 +31,7 @@
 
 							<ul class="thumbnails">
 								<li class="span3"> 
-									<input style="display:none;" id="file-input1" name="photourl1" type='file' onchange="readURL(this);" required/>                    
+									<input style="display:none;" id="file-input1" name="photourl1" type='file' onchange="readURL(this);"/>                    
 									<label for="file-input1">
 										<i class="icon-camera"></i>.Photo 200x200<br>
 										<img id="blah" src="//placehold.it/100" alt="avatar" alt="your image" />
@@ -48,7 +48,7 @@
 
 							
 			<div class="form-group">
-         <label>Action date :</label>
+         <label>Issue date :</label>
 
             <input type="text" class="form-control" name="actiondate" placeholder="Enter date" value="{{ old('actiondate') }}">
             </div>
@@ -62,7 +62,7 @@
 
 
         <div class="form-group">
-          <label>Actions :</label>
+          <label>Issues :</label>
 
 
           <textarea name="actions" placeholder="Enter your actions" class="form-control" rows="6"></textarea>

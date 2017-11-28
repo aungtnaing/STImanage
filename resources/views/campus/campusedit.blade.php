@@ -88,7 +88,7 @@
 								<div class="col-sm-4">
 									<label>Building :</label>
 
-									<input type="text" class="form-control" name="building" style="width:40%;" maxlength="15" size="15" placeholder="Enter building" value="{{ $campu->building }}"">
+									<input type="text" class="form-control" name="building" style="width:40%;" placeholder="Enter building" value="{{ $campu->building }}"">
 
 								</div>
 								<div class="col-sm-4"><label>Campus :</label>
@@ -104,7 +104,7 @@
 								<div class="col-sm-4">
 									<label>Room Area :</label>
 
-									<input type="text" class="form-control" name="roomarea" style="width:40%;" maxlength="20" size="20" placeholder="Enter roomarea" value="{{ $campu->roomarea }}">
+									<input type="text" class="form-control" name="roomarea" style="width:40%;" maxlength="40" size="40" placeholder="Enter roomarea" value="{{ $campu->roomarea }}">
 
 								</div> 
 								<div class="col-sm-4"><label>Room Type :</label>
@@ -171,14 +171,14 @@
 </div>
 
 <div class="row">
-<a class="btn btn-mini btn-primary" href="{{ route("campusitemcreate", $campu->id ) }}">Add Action</a>
+<a class="btn btn-mini btn-primary" href="{{ route("campusitemcreate", $campu->id ) }}">Add New Issue</a>
 </div>
 	
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Campus Action
+					Campus Issues
 				</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
@@ -187,9 +187,9 @@
 							<tr>
 									<th>id</th>
 									
-									<th>Action</th>				
-									<th>Action Date</th>
-									<th>Actions</th>
+									<th>Issue</th>				
+									<th>Issue Date</th>
+									<th>Issues</th>
 									<th>Staff</th>
 									<th>active</th>
 

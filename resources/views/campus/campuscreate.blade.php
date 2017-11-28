@@ -31,7 +31,7 @@
 
 							<ul class="thumbnails">
 								<li class="span3"> 
-									<input style="display:none;" id="file-input1" name="photourl1" type='file' onchange="readURL(this);" required/>                    
+									<input style="display:none;" id="file-input1" name="photourl1" type='file' onchange="readURL(this);"/>                    
 									<label for="file-input1">
 										<i class="icon-camera"></i>.Photo1 200x200<br>
 										<img id="blah" src="//placehold.it/100" alt="avatar" alt="your image" />
@@ -42,7 +42,7 @@
 								</li>
 
 								<li class="span3"> <a> 
-									<input style="display:none;" id="file-input2" name="photourl2" type='file' onchange="readURL1(this);" required/>                    
+									<input style="display:none;" id="file-input2" name="photourl2" type='file' onchange="readURL1(this);"/>                    
 									<label for="file-input2">
 										<i class="icon-camera"></i>.Photo2 200x200<br>
 										<img id="blah1" src="//placehold.it/100" alt="avatar" alt="your image" />

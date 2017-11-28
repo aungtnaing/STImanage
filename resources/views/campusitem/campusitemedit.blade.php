@@ -5,7 +5,7 @@
 <div id="content">
 	<div id="content-header">
 	
-		<h3>Campus Action</h3>
+		<h3>Campus Issue</h3>
 
 	</div>
 	<div class="container-fluid">
@@ -26,7 +26,7 @@
 		<div class="span12">
 				<div class="widget-box">
 					<div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-						<h5>campus-info</h5>
+						<h5>campus issue-info</h5>
 					</div>
 					<div class="widget-content">
 
@@ -55,14 +55,14 @@
 								</ul>
 
 								<div class="form-group">
-         <label>Action date :</label>
+         <label>Issue date :</label>
 
             <input type="text" class="form-control" name="actiondate" placeholder="Enter date" value="{{ $campusitem->actiondate }}">
             </div>
           
 
         <div class="form-group">
-          <label>Actions :</label>
+          <label>Issues :</label>
 
 
           <textarea name="actions" placeholder="Enter your actions" class="form-control" rows="6">{{ $campusitem->actions }}</textarea>
