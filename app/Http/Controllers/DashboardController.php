@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\Tasks;
+
 use DB;
 use Input;	
 
@@ -26,13 +28,11 @@ class DashboardController extends Controller {
 		
 		$user = User::find($request->user()->id);
 
-		// $visitors = Visitors::where('active', 0)
-		// 					->orderBy('id','DESC')
-		// 					->get();
+		$tasks = Task::where('active', 1)->get();
 
 		return view('pages.dashboard')
-				->with('user',$user);
-				// ->with('visitors', $visitors);	
+				->with('user',$user)
+				->with('tasks', $tasks);	
 	}
 
 	

@@ -3,13 +3,13 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Campusitem;
+use App\Tasks;
 use DB;
 
 use File;
 use Input;
 
-class CampusitemController extends Controller {
+class TasksController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -18,10 +18,10 @@ class CampusitemController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-		$campusitems = Campusitem::All();
-    	
-		return view("campusitem.campusitempannel")
-		->with("campusitems", $campusitems);
+		$tasks = Tasks::All();
+
+		return view("tasks.taskpannel")
+		->with("tasks", $tasks);
 	}
 
 	
@@ -33,7 +33,7 @@ class CampusitemController extends Controller {
 	public function create()
 	{
 		//
-		return view("campusitem.campusitemcreate");
+		return view("tasks.taskcreate");
 
 	}
 
@@ -48,15 +48,14 @@ class CampusitemController extends Controller {
 		
 
 		$this->validate($request,[
-			'actiondate' => 'required',
-			'actions' => 'required',
+			'tasktitle' => 'required',
 			
 			]);
 
 
-		$campusitem = new Campusitem();
-		$imagePath = public_path() . '/images/campusitem/';
-		$lastid = DB::table('campusitem')->select('id')->orderBy('id', 'DESC')->first();
+		$task = new Tasks();
+		$imagePath = public_path() . '/images/tasks/';
+		$lastid = DB::table('tasks')->select('id')->orderBy('id', 'DESC')->first();
 		if($lastid!=null)
 		{
 			$lastid = $lastid->id + 1;
@@ -81,32 +80,33 @@ class CampusitemController extends Controller {
 				$name =  time()  . '-photo' . '.' . $input['photourl1']->getClientOriginalExtension();
 				File::exists($destinationPath) or File::makeDirectory($destinationPath, 0777, true, true);
 				Input::file('photourl1')->move($destinationPath, $name); // uploading file to given path
-				$photourl1 = "/images/campusitem/" . $directory . '/photos/' .  $name;
-			
+				$photourl1 = "/images/tasks/" . $directory . '/photos/' .  $name;
+
 			}
 
 		}
 
-	
-
-		$campusitem->userid = $request->user()->id;
-
-		$campusitem->actiondate = $request->input("actiondate");
-		$campusitem->actions = $request->input("actions");
-
-		$campusitem->campusid = $request->input("campusid");
 
 
-		$campusitem->active = 0;
-		if (Input::get('active') === '1'){$campusitem->active = 1;}
+		$task->userid = $request->user()->id;
 
-	
-	
-		$campusitem->photourl1 = $photourl1;
-	
+		$task->taskdate = $request->input("taskdate");
+		$task->content = $request->input("content");
+		$task->tasktitle = $request->input("tasktitle");
+		$task->deadline = $request->input("deadline");
+
+		$task->budget = $request->input("budget");
+
+		$task->active = 0;
+		if (Input::get('active') === '1'){$task->active = 1;}
+
+
+
+		$task->photourl1 = $photourl1;
+
 		
-		$campusitem->save();
-		return redirect()->route("campus.edit", $campusitem->campusid);
+		$task->save();
+		return redirect()->route("tasks.index");
 	}
 
 	/**
@@ -131,8 +131,8 @@ class CampusitemController extends Controller {
 	{
 		//
 		
-		$campusitem = Campusitem::find($id);
-		return view('campusitem.campusitemedit')->with('campusitem',$campusitem);
+		$task = Tasks::find($id);
+		return view('tasks.taskedit')->with('task',$task);
 	}
 
 	/**
@@ -145,31 +145,31 @@ class CampusitemController extends Controller {
 	{
 		
 		$this->validate($request,[
-			'actiondate' => 'required',
-			'actions' => 'required',
+			'tasktitle' => 'required',
+		
 			
 			]);
 
 		
-		$campusitem = Campusitem::find($id);
-			
-		$imagePath = public_path() . '/images/campusitem/';
-	
+		$task = Tasks::find($id);
+
+		$imagePath = public_path() . '/images/tasks/';
+
 		$directory = $id;
 
 
 		$input = $request->all();
 		$destinationPath = $imagePath . $directory . '/photos';
-	
-		$photourl1 = $campusitem->photourl1;
+
+		$photourl1 = $task->photourl1;
 		
-	
+
 		if(Input::file('photourl1')!="")
 		{
 			
 
-			 if(Input::file('photourl1')->isValid())
-			 {
+			if(Input::file('photourl1')->isValid())
+			{
 				if($photourl1!="")
 				{
 					if(file_exists(public_path() .$photourl1))
@@ -177,32 +177,34 @@ class CampusitemController extends Controller {
 						unlink(public_path() . $photourl1);
 					}
 				}
-					
+
 
 
 				$name =  time() . '-photo' . '.' . $input['photourl1']->getClientOriginalExtension();
 				File::exists($destinationPath) or File::makeDirectory($destinationPath, 0777, true, true);
 				Input::file('photourl1')->move($destinationPath, $name); // uploading file to given path
-				$photourl1 = "/images/campusitem/" . $directory . '/photos/' .  $name;
-			 }
+				$photourl1 = "/images/tasks/" . $directory . '/photos/' .  $name;
+			}
 
 		}
 
-			
-		$campusitem->userid = $request->user()->id;
 
-		$campusitem->actiondate = $request->input("actiondate");
+		$task->userid = $request->user()->id;
 
-		$campusitem->actions = $request->input("actions");
-		
-		$campusitem->photourl1 = $photourl1;
-	
-		$campusitem->active = 0;
-		if (Input::get('active') === ""){$campusitem->active = 1;}
+		$task->taskdate = $request->input("taskdate");
+		$task->content = $request->input("content");
+		$task->tasktitle = $request->input("tasktitle");
+		$task->deadline = $request->input("deadline");
+
+		$task->budget = $request->input("budget");
 
 
-		$campusitem->save();
-		return redirect()->route("campus.edit", $campusitem->campusid);
+		$task->active = 0;
+		if (Input::get('active') === ""){$task->active = 1;}
+
+
+		$task->save();
+		return redirect()->route("tasks.index");
 	}
 
 	/**
@@ -214,23 +216,23 @@ class CampusitemController extends Controller {
 	public function destroy($id)
 	{
 		//
-			$campusitem = Campusitem::find($id);
+		$task = Tasks::find($id);
 
-		$photourl1 = $campusitem->photourl1;
-	
-			if($photourl1!="")
-				{
-					if(file_exists(public_path() .$photourl1))
-					{
-						unlink(public_path() . $photourl1);
-					}
-				}
+		$photourl1 = $task->photourl1;
+
+		if($photourl1!="")
+		{
+			if(file_exists(public_path() .$photourl1))
+			{
+				unlink(public_path() . $photourl1);
+			}
+		}
 
 		
 		
-		Campusitem::destroy($id);
+		Tasks::destroy($id);
 
-		return redirect()->route("Campusitem.index");
+		return redirect()->route("tasks.index");
 	}
 
 	public function rrmdir($dir) {

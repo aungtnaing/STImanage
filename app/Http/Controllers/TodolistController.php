@@ -19,10 +19,10 @@ class TodolistController extends Controller {
 	public function index(Request $request)
 	{
 		$todolists = Todolists::where('userid', $request->user()->id)
-								->where('active',1)
-								->get();
+		->where('active',1)
+		->get();
 
-    	
+
 		return view("todolist.todolistspannel")
 		->with("todolists", $todolists);
 	}
@@ -35,9 +35,9 @@ class TodolistController extends Controller {
 	{
 		//
 		$todolists = Todolists::where('active',1)
-								->get();
+		->get();
 
-    	
+
 		return view("todolist.todolistmanagerpannel")
 		->with("todolists", $todolists);
 
@@ -63,6 +63,9 @@ class TodolistController extends Controller {
 	public function store(Request $request)
 	{
 		
+		
+
+
 
 		$this->validate($request,[
 			'title' => 'required',
@@ -78,7 +81,7 @@ class TodolistController extends Controller {
 		
 		$todolist->description = $request->input("description");
 
-				$todolist->userid = $request->user()->id;
+		$todolist->userid = $request->user()->id;
 		$todolist->tdate = $request->input("tdate");
 		$todolist->status = $request->input("status");	
 		$todolist->done = 0;
@@ -87,8 +90,8 @@ class TodolistController extends Controller {
 		$todolist->active = 0;
 		if (Input::get('active') === '1'){$todolist->active = 1;}
 
-	
-	
+
+
 		
 		$todolist->save();
 		return redirect()->route("todolists.index");
@@ -136,10 +139,10 @@ class TodolistController extends Controller {
 			]);
 
 		$todolist = Todolists::find($id);
-			
-			$todolist->tdate = $request->input("tdate");
+
+		$todolist->tdate = $request->input("tdate");
 		$todolist->status = $request->input("status");	
-	
+
 		$todolist->title = $request->input("title");
 
 		
@@ -148,7 +151,7 @@ class TodolistController extends Controller {
 
 		$todolist->done = 0;
 		if (Input::get('done') === ""){$todolist->done = 1;}
-	
+
 		$todolist->active = 0;
 		if (Input::get('active') === ""){$todolist->active = 1;}
 
