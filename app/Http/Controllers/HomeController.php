@@ -32,7 +32,12 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		$tasks = Task::where('active', 1)->get();
+
+		// echo "error";
+		// die();
+		$tasks = Tasks::where('active', 1)->get();
+
+
 		return view('pages.home')->with('tasks', $tasks);
 	}
 

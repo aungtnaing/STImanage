@@ -64,19 +64,7 @@
                             <a href="/assigntasks">assign task</a>
                         </li>
 
-                        <li>
-                        <a href="#">Tasks issues <span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level">
-                                
-                            @foreach($tasks as $task)
-                                <li>
-                                    <a href="#">{{ $task->tasktitle }}</a>
-                                </li>
-                            @endforeach
-                            </ul>
-                            <!-- /.nav-third-level -->
-                        </li>
-
+                       
 
 
                     </ul>
