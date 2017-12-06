@@ -28,7 +28,7 @@ class DashboardController extends Controller {
 		
 		$user = User::find($request->user()->id);
 
-		$tasks = Task::where('active', 1)->get();
+		$tasks = Tasks::where('active', 1)->get();
 
 		return view('pages.dashboard')
 				->with('user',$user)
