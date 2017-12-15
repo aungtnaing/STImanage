@@ -5,7 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Enquirys;
 use DB;
-
+use App\Assigntasks;
+use App\Tasks;
 use File;
 use Input;
 
@@ -19,9 +20,14 @@ class EnquiryController extends Controller {
 	public function index(Request $request)
 	{
 		$enquirys = Enquirys::All();
-    	
+    	$tasks = Tasks::All();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+		
+		
 		return view("enquirys.enquiryspannel")
-		->with("enquirys", $enquirys);
+		->with("enquirys", $enquirys)
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 	}
 
 	
@@ -30,10 +36,14 @@ class EnquiryController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
 		//
-		return view("enquirys.createenquiry");
+			$tasks = Tasks::All();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+		
+		return view("enquirys.createenquiry")->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 
 	}
 	/**
@@ -120,12 +130,15 @@ class EnquiryController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($id, Request $request)
 	{
 		//
-		
+		$tasks = Tasks::All();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
 		$enquiry = Enquirys::find($id);
-		return view('enquirys.editenquiry')->with('enquiry',$enquiry);
+		return view('enquirys.editenquiry')->with('enquiry',$enquiry)
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 	}
 
 	/**

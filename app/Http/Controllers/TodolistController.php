@@ -5,9 +5,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Todolists;
 use DB;
-
+use App\Assigntasks;
+use App\Tasks;
 use File;
 use Input;
+use App\User;
 
 class TodolistController extends Controller {
 
@@ -23,23 +25,36 @@ class TodolistController extends Controller {
 		->get();
 
 
+		$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+
+
+
+		$user = User::find($request->user()->id);
+
+
 		return view("todolist.todolistspannel")
-		->with("todolists", $todolists);
+		->with("todolists", $todolists)
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 	}
 	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
-	public function todolistmanager()
+	public function todolistmanager(Request $request)
 	{
 		//
 		$todolists = Todolists::where('active',1)
 		->get();
-
+$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
 
 		return view("todolist.todolistmanagerpannel")
-		->with("todolists", $todolists);
+		->with("todolists", $todolists)
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 
 	}
 	
@@ -48,10 +63,18 @@ class TodolistController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
 		//
-		return view("todolist.todolistcreate");
+		$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+
+
+
+
+		
+		return view("todolist.todolistcreate")->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 
 	}
 
@@ -115,12 +138,20 @@ class TodolistController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($id, Request $request)
 	{
 		//
+		$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+
+
+
+
 		
 		$todolist = Todolists::find($id);
-		return view('todolist.todolistedit')->with('todolist',$todolist);
+		return view('todolist.todolistedit')->with('todolist',$todolist)
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 	}
 
 	/**

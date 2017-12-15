@@ -64,7 +64,21 @@
                             <a href="/assigntasks">assign task</a>
                         </li>
 
-                       
+                        <li>
+                            <a href="#">Tasks feedback <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+
+                                @foreach($tasks as $task)
+
+                                <li>
+                                    <a href="{{ route("feedbackissue", $task->id ) }}">{{ $task->tasktitle }}</a>
+                                </li>
+
+                                @endforeach
+
+                            </ul>
+                            <!-- /.nav-third-level -->
+                        </li>
 
 
                     </ul>
@@ -114,12 +128,30 @@
 
         @endif
 
-
+        @if(Auth::user()->roleid != 1)
         <li>
-            <a href="/todolists">your todolist</a>
-        </li>
+            <a href="#"><i class="fa fa-wrench fa-fw"></i> Your tasks<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              @foreach($ourtasks as $ourtask)
+              @if($ourtask->task->active == 1)
+              <li>
+                <a href="{{ route("feedbackissue", $ourtask->taskid ) }}">{{ $ourtask->task->tasktitle }}</a>
+            </li>
+            @endif
 
-    </ul>
+            @endforeach
+
+        </ul>
+    </li>
+    @endif
+
+
+
+    <li>
+        <a href="/todolists">your todolist</a>
+    </li>
+
+</ul>
 </div>
 <!-- /.sidebar-collapse -->
 </div>

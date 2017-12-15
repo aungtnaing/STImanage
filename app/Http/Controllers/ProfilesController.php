@@ -4,7 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-
+use App\Assigntasks;
+use App\Tasks;
 use App\User;
 use App\Category;
 use DB;
@@ -39,9 +40,15 @@ class ProfilesController extends Controller {
 		// echo "hello dsh";
 		// die();
 
+			$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+    	
+
 		$user = User::find($request->user()->id);
 
-		return view('users.userprofileupdate')->with('user',$user);
+		return view('users.userprofileupdate')->with('user',$user)
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 	}
 
 	/**
@@ -115,14 +122,22 @@ public function store(Request $request)
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($id, Request $request)
 	{
+
+			$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+    	
+
+
 		
 		if(Auth::user()->roleid==1)
 		{
 			$user = User::find($id);
 
-			return view('users.userrole')->with('user',$user);
+			return view('users.userrole')->with('user',$user)
+			 ->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 		}
 		else
 		{

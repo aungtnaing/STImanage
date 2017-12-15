@@ -5,13 +5,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Assigntasks;
 use App\Tasks;
+use App\Taskissues;
 use App\User;
 use DB;
 
 use File;
 use Input;
 
-class AssigntasksController extends Controller {
+class FeedbacksController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -20,17 +21,18 @@ class AssigntasksController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-		$users = User::All();
-		$assignlists = Assigntasks::All();
-		$tasks = Tasks::where('active', 1)->get();
-		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
 		
-		return view("tasks.assigntaskpannel")
-		->with("users", $users)
-		->with("assignlists", $assignlists)
-		->with("tasks", $tasks)
-		->with("ourtasks", $ourtasks);
+		// $tasks = Tasks::where('active', 1)->get();
+		// $ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+		
+		
+		// return view("feedbacks.feedbackpannel")
+		// ->with("tasks", $tasks)
+		// ->with("ourtasks", $ourtasks);
 	}
+
+	
+
 
 	
 	/**
@@ -55,62 +57,31 @@ class AssigntasksController extends Controller {
 	{
 		
 
-		$tasks = Tasks::where('active',1)->get();
-	
-
-		foreach($tasks as $task)
-		{
 
 
-			if (Input::get($task->id) === '1')
-			{
-							
-
-				$assigntask = Assigntasks::where('userid', Input::get('userid'))
-				                           ->where('taskid', $task->id)
-				                           ->get();
-				 if(count($assigntask) > 0)
-				 {
-
-				 
-				 }
-				 else
-				 {
-
-				 	$assigntask = new Assigntasks();
-				$assigntask->taskid = $task->id;
-				$assigntask->userid = Input::get('userid');
-				$assigntask->save();
 
 
-				 }
+		$this->validate($request,[
+			'feedbackdate' => 'required',
+			'feedback' => 'required',
 
-				
-
-			}
-			else
-			{
-
-							
+			]);
 
 
-				$assigntask = Assigntasks::where('userid', Input::get('userid'))
-				                           ->where('taskid', $task->id)
-				                           ->get();
-				 if(count($assigntask)>0)
-				 {
+		$feebackitem = new Taskissues();
+		$feebackitem->feedbackdate = $request->input("feedbackdate");
+		$feebackitem->feedback = $request->input("feedback");
+		$feebackitem->costs = $request->input("costs");
+		$feebackitem->taskid = $request->input("taskid");
+		$feebackitem->userid = $request->user()->id;
+		$feebackitem->active = 0;
+		if (Input::get('active') === '1'){$feebackitem->active = 1;}
 
-				 	Assigntasks::destroy($assigntask[0]->id);
-				 }
 
-			}
-
-		}
 
 		
-
-		
-		return redirect()->route("assigntasks.index");
+		$feebackitem->save();
+		return redirect()->route("feedbackissue", $request->input("taskid"));
 	}
 
 	/**
@@ -134,13 +105,15 @@ class AssigntasksController extends Controller {
 	public function edit($id, Request $request)
 	{
 		//
-		$user = User::find($id);
+	
 		$tasks = Tasks::where('active',1)->get();
-		$assigntasks = Assigntasks::where('userid', $id)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
 
-		return view("tasks.assigntaskcreate")->with('user', $user)
+		
+		$feedback = Taskissues::find($id);
+		return view("feedbacks.feedbackedit")->with('feedback', $feedback)
 		->with('tasks', $tasks)
-		->with('assigntasks', $assigntasks);
+		->with('ourtasks', $ourtasks);
 		
 	}
 
@@ -153,6 +126,30 @@ class AssigntasksController extends Controller {
 	public function update($id,Request $request)
 	{
 
+		$this->validate($request,[
+			'feedbackdate' => 'required',
+			'feedback' => 'required',
+
+			]);
+		// echo "string";
+		// die();
+
+		$feebackitem = Taskissues::find($id);
+
+		$feebackitem->feedbackdate = $request->input("feedbackdate");
+		$feebackitem->feedback = $request->input("feedback");
+		$feebackitem->costs = $request->input("costs");
+		
+		$feebackitem->active = 0;
+		if (Input::get('active') === ""){$feebackitem->active = 1;}
+
+		
+
+
+
+		
+		$feebackitem->save();
+		return redirect()->route("feedbackissue", $feebackitem->taskid);
 	}
 
 	/**

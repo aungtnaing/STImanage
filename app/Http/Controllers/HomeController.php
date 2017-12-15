@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use App\Tasks;
+use App\Assigntasks;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller {
 
@@ -30,15 +32,17 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
 
 		// echo "error";
 		// die();
 		$tasks = Tasks::where('active', 1)->get();
 
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
 
-		return view('pages.home')->with('tasks', $tasks);
+		return view('pages.home')->with('tasks', $tasks)
+								 ->with('ourtasks', $ourtasks);
 	}
 
 }

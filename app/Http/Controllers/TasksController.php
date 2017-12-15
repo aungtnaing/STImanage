@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Tasks;
+use App\Assigntasks;
 use DB;
 
 use File;
@@ -19,9 +20,12 @@ class TasksController extends Controller {
 	public function index(Request $request)
 	{
 		$tasks = Tasks::All();
-
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+		
+		
 		return view("tasks.taskpannel")
-		->with("tasks", $tasks);
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 	}
 
 	
@@ -30,10 +34,14 @@ class TasksController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
 		//
-		return view("tasks.taskcreate");
+		$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+		return view("tasks.taskcreate")
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 
 	}
 
@@ -127,12 +135,21 @@ class TasksController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($id,Request $request)
 	{
 		//
 		
+		$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+
 		$task = Tasks::find($id);
-		return view('tasks.taskedit')->with('task',$task);
+
+	
+		return view("tasks.taskedit")->with("task", $task)
+			->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
+
+										
 	}
 
 	/**
@@ -146,7 +163,7 @@ class TasksController extends Controller {
 		
 		$this->validate($request,[
 			'tasktitle' => 'required',
-		
+
 			
 			]);
 

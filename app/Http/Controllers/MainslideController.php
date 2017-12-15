@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mainslides;
 use DB;
+use App\Tasks;
+use App\Assigntasks;
 
 use File;
 use Input;
@@ -19,9 +21,13 @@ class MainslideController extends Controller {
 	public function index(Request $request)
 	{
 		$mainslides = Mainslides::All();
-    	
+    	$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+		
 		return view("mainslide.mainslidespannel")
-		->with("mainslides", $mainslides);
+		->with("mainslides", $mainslides)
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 	}
 
 	
@@ -30,10 +36,14 @@ class MainslideController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
 		//
-		return view("mainslide.mainslidecreate");
+		$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+		return view("mainslide.mainslidecreate")
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 
 	}
 
@@ -137,12 +147,17 @@ class MainslideController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($id, Request $request)
 	{
 		//
+		$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
 		
+	
 		$mainslide = Mainslides::find($id);
-		return view('mainslide.mainslideedit')->with('mainslide',$mainslide);
+		return view('mainslide.mainslideedit')->with('mainslide',$mainslide)
+			->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 	}
 
 	/**

@@ -10,7 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+use App\Tasks;
+use App\Assigntasks;
+use App\Taskissues;
 
 Route::get('/', 'WelcomeController@index');
 
@@ -36,6 +38,41 @@ Route::group(['middleware' => 'auth'],function()
 	Route::resource('tasks','TasksController');
 	Route::resource('assigntasks','AssigntasksController');
 
+	Route::resource('feedbacks','FeedbacksController');
+
+	Route::get('feedbackissue/{taskid}', ['as' => 'feedbackissue', function ($taskid) {
+
+
+		$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', Auth::user()->id)->get();
+		
+		$feedbacks = Taskissues::where('taskid', $taskid)
+		->get();
+		$task = Tasks::find($taskid);
+		// echo $taskid;
+		// echo $task;
+		// die();
+
+		return view("feedbacks.feedbackpannel")
+		->with("taskid", $taskid)
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks)
+		->with("task", $task)
+		->with("feedbacks", $feedbacks);
+
+	}]);
+
+	Route::get('feedbackcreate/{taskid}', ['as' => 'feedbackcreate', function ($taskid) {
+
+			$tasks = Tasks::where('active', 1)->get();
+			$ourtasks = Assigntasks::where('userid', Auth::user()->id)->get();
+
+
+			return view("feedbacks.feedbackcreate")->with('taskid', $taskid)
+			->with('tasks', $tasks)
+			->with('ourtasks', $ourtasks);
+			
+		}]);
 
 	
 	Route::group(['middleware' => 'rolewaredashboard'],function()
@@ -70,7 +107,14 @@ Route::group(['middleware' => 'auth'],function()
 
 
 		Route::get('campusitemcreate/{campusid}', ['as' => 'campusitemcreate', function ($campusid) {
-			return view("campusitem.campusitemcreate")->with('campusid', $campusid);
+
+			$tasks = Tasks::where('active', 1)->get();
+			$ourtasks = Assigntasks::where('userid', Auth::user()->id)->get();
+
+
+			return view("campusitem.campusitemcreate")->with('campusid', $campusid)
+			->with('tasks', $tasks)
+			->with('ourtasks', $ourtasks);
 			
 		}]);
 

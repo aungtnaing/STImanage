@@ -2,7 +2,8 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Assigntasks;
+use App\Tasks;
 use Illuminate\Http\Request;
 use App\User;
 use DB;
@@ -18,14 +19,19 @@ class UserspannelController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
 
 
 		$users = User::All();
+
+			$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
     		
          return view("users.usertypepannel")
-            ->with("users", $users);
+            ->with("users", $users)
+            ->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 
            
 	}

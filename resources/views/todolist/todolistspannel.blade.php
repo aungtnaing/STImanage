@@ -10,7 +10,7 @@
 	</div>
 	<!-- /.row -->
 	<div class="row">
-<a class="btn btn-primary btn-mini pull-left" href="{{ route("todolists.create") }}">Add New Task</a>	</div>
+<a class="btn btn-primary btn-mini pull-left" href="{{ route("todolists.create") }}">Add New</a>	</div>
 
 	<div class="row">
 		<div class="col-lg-12">

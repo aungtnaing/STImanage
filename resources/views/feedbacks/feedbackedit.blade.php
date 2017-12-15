@@ -5,12 +5,12 @@
 <div id="content">
 	<div id="content-header">
 		
-		<h3>Task edit</h3>
+		<h3>Feedback edit</h3>
 
 	</div>
 	<div class="container-fluid">
 
-			@if (count($errors) > 0)
+		@if (count($errors) > 0)
 		<div class="alert alert-danger">
 			<ul>
 				@foreach ($errors->all() as $error)
@@ -26,71 +26,46 @@
 			<div class="span12">
 				<div class="widget-box">
 					<div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-						<h5>task edit-info</h5>
+						<h5>feedback-info</h5>
 					</div>
 					<div class="widget-content">
 
-					
-					<form action="{{ route("tasks.update", $task->id) }}" method="POST" enctype="multipart/form-data">
+						<form action="{{ route("feedbacks.update", $feedback->id) }}" method="POST" enctype="multipart/form-data">
 							<input name="_method" type="hidden" value="PATCH">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-							<ul class="thumbnails">
-								<li class="span3"> 
-									<input style="display:none;" id="file-input1" name="photourl1" type='file' onchange="readURL(this);"/>                    
-									<label for="file-input1">
-										<i class="icon-camera"></i>.Photo 200x200<br>
-										@if($task->photourl1!="")
-										<img id="blah" src= "{{ $task->photourl1 }}" width="100" height="100">
-										@else
-										<img id="blah" src="//placehold.it/100" alt="avatar" alt="your image" />
-										@endif
-									</label>
-									<div class="actions"><a id="preview1" class="lightbox_trigger" herf=""><i class="icon-search"></i></a> </div>
-
-								</li>
-								
-								
-
-							</ul>
-
-							<div class="form-group">
-								<label>Task Title :</label>
-
-								<input type="text" class="form-control" name="tasktitle" placeholder="Enter title" value="{{ $task->tasktitle }}" required>
-							</div>
-
-							<div class="form-group">
-								<label>Task description :</label>
-
-
-								<textarea name="content" placeholder="Enter task description" class="form-control" rows="8">{{ $task->content }}</textarea>
-
-							</div>
-
-							<div class="form-group">
-								<label>Task date :</label>
-
-								<input type="text" class="form-control" name="taskdate" placeholder="Enter date" value="{{ $task->taskdate }}">
-							</div>
-
-							<div class="form-group">
-								<label>Dead line date :</label>
-
-								<input type="text" class="form-control" name="deadline" placeholder="Enter deadline date" value="{{ $task->deadline }}">
-							</div>
-
-							<div class="form-group">
-								<label>Budget :</label>
-
-								<input type="text" class="form-control" name="budget" placeholder="Enter budget" value="{{ $task->budget }}">
-							</div>
-
 							
 
+								<div class="form-group">
+								<label>Feedback Date :</label>
+
+								<input type="text" class="form-control" name="feedbackdate" placeholder="Enter feedback date" value="{{ $feedback->feedbackdate }}">
+							</div>
+
+
+
+
+
 							<div class="form-group">
-								
-								@if($task->active==0)
+								<label>Feedback :</label>
+
+
+								<textarea name="feedback" placeholder="Enter your feedback" class="form-control" rows="5">{{ $feedback->feedback }}</textarea>
+
+							</div>
+
+
+							<div class="form-group">
+								<label>Costs :</label>
+
+								<input type="text" class="form-control" name="costs" placeholder="Enter stitle" value="{{ $feedback->costs }}">
+
+							</div> 
+
+
+
+							<div class="form-group">
+
+								@if($feedback->active==0)
 								<input type="checkbox" name="active" value="">Active<br>  
 								@else   
 								<input type="checkbox" name="active" value="" checked>Active<br>
@@ -103,15 +78,14 @@
 							</div>
 						</form>
 					</div>
-				</div>
-
-
 			</div>
 		</div>
 	</div>
 </div>
 
 
+
+</div>
 
 <script src="<?php echo url(); ?>/assets/js/jquery.min.js"></script> 
 <script src="<?php echo url(); ?>/assets/js/jquery.ui.custom.js"></script> 
@@ -135,6 +109,14 @@
 <script type="text/javascript">
 
 
+
+
+// $(document).ready(function(){
+//     $("#file-input1").on('change',function(){
+//         //do whatever you want
+//         document.getElementById("preview1").src = $(this).src;
+//     });
+// });
 function readURL(input) {
 
 
@@ -152,6 +134,7 @@ function readURL(input) {
 		reader.readAsDataURL(input.files[0]);
 	}
 }
+
 
 
 

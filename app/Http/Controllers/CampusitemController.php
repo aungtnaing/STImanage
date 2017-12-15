@@ -5,7 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Campusitem;
 use DB;
-
+use App\Tasks;
+use App\Assigntasks;
 use File;
 use Input;
 
@@ -19,9 +20,13 @@ class CampusitemController extends Controller {
 	public function index(Request $request)
 	{
 		$campusitems = Campusitem::All();
-    	
+    	$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+	
 		return view("campusitem.campusitempannel")
-		->with("campusitems", $campusitems);
+		->with("campusitems", $campusitems)
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 	}
 
 	
@@ -30,10 +35,16 @@ class CampusitemController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
 		//
-		return view("campusitem.campusitemcreate");
+		$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+		
+		
+		
+		return view("campusitem.campusitemcreate")->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 
 	}
 
@@ -127,12 +138,17 @@ class CampusitemController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($id, Request $request)
 	{
 		//
 		
 		$campusitem = Campusitem::find($id);
-		return view('campusitem.campusitemedit')->with('campusitem',$campusitem);
+		$tasks = Tasks::where('active', 1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+	
+		return view('campusitem.campusitemedit')->with('campusitem',$campusitem)
+		->with("tasks", $tasks)
+		->with("ourtasks", $ourtasks);
 	}
 
 	/**

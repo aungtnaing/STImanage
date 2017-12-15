@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Tasks;
+use App\Assigntasks;
 
 use DB;
 use Input;	
@@ -30,9 +31,15 @@ class DashboardController extends Controller {
 
 		$tasks = Tasks::where('active', 1)->get();
 
+	
+
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+
+
 		return view('pages.dashboard')
 				->with('user',$user)
-				->with('tasks', $tasks);	
+				->with('tasks', $tasks)
+				->with('ourtasks', $ourtasks);	
 	}
 
 	

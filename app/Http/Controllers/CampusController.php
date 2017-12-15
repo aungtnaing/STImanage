@@ -7,6 +7,9 @@ use App\Campus;
 use App\Campusitem;
 use DB;
 
+use App\Tasks;
+use App\Assigntasks;
+
 use File;
 use Input;
 
@@ -20,9 +23,15 @@ class CampusController extends Controller {
 	public function index(Request $request)
 	{
 		$campus = Campus::All();
-    	
+
+		$tasks = Tasks::where('active',1)->get();
+	
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+
 		return view("campus.campuspannel")
-		->with("campus", $campus);
+		->with("campus", $campus)
+		->with('tasks', $tasks)
+		->with('$ourtasks', $ourtasks);
 	}
 
 	
@@ -31,10 +40,16 @@ class CampusController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
 		//
-		return view("campus.campuscreate");
+
+		$tasks = Tasks::where('active',1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+
+
+		return view("campus.campuscreate")->with('tasks', $tasks)
+		->with('ourtasks', $ourtasks);
 
 	}
 
@@ -154,14 +169,22 @@ class CampusController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($id, Request $request)
 	{
 		//
 		$campusitems = Campusitem::where('campusid','=',$id)->get();
 
 		$campu = Campus::find($id);
+
+		$tasks = Tasks::where('active',1)->get();
+		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+
+
+
 		return view('campus.campusedit')->with('campu',$campu)
-										->with('campusitems', $campusitems);
+										->with('campusitems', $campusitems)
+										->with('tasks', $tasks)
+										->with('ourtasks', $ourtasks);
 	}
 
 	/**

@@ -269,6 +269,7 @@
         <div class="form-group" style="display: none;">
           <input type="checkbox" name="active" value="1" checked>Active
         </div>
+        </div>
 
         <div class="form-actions">
           <input class="btn btn-outline btn-primary" name="public" type="submit" value="Save"> 
