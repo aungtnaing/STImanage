@@ -3,7 +3,7 @@
 <head>
 	@include('includes.head')  
 </head>
-<body>
+<body style="font-family: courier new;">
 	<div id="wrapper">
 		@include('includes.header') 
         <div id="page-wrapper">

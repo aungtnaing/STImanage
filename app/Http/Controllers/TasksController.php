@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Tasks;
 use App\Assigntasks;
 use DB;
-
+use App\User;
 use File;
 use Input;
 
@@ -19,12 +19,20 @@ class TasksController extends Controller {
 	 */
 	public function index(Request $request)
 	{
+		
 		$tasks = Tasks::All();
 		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
 		
-		
+		$users = User::All();
+		$assignlists = Assigntasks::All();
+		// $tasks = Tasks::where('active', 1)->get();
+		// $ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+
+
 		return view("tasks.taskpannel")
 		->with("tasks", $tasks)
+		->with("users", $users)
+		->with("assignlists", $assignlists)
 		->with("ourtasks", $ourtasks);
 	}
 

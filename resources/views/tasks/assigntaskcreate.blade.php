@@ -29,7 +29,7 @@
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 							<div class="form-group">
-								<label>Name : {{ $user->id }}</label><br>
+								<label>Name : {{ $user->name }}</label><br>
 								@if($user->roleid==1)
 								<label>Role : Admin</label>
 								@elseif($user->roleid==2)

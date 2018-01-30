@@ -75,6 +75,7 @@
 										<form method="POST" action="{{ route("feedbacks.destroy", $feedback->id) }}" accept-charset="UTF-8">
 											<input name="_method" type="hidden" value="DELETE">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
+											<input style="display:none;" name="taskid" type="text" value="{{ $task->id }}">
 											<input class="btn btn-mini btn-danger" type="submit" value="Delete">
 										</form>
 									</td>

@@ -7,6 +7,7 @@ use App\Assigntasks;
 use App\Tasks;
 use App\User;
 use DB;
+use Mail;
 
 use File;
 use Input;
@@ -20,16 +21,19 @@ class AssigntasksController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-		$users = User::All();
-		$assignlists = Assigntasks::All();
-		$tasks = Tasks::where('active', 1)->get();
-		$ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
+		// $users = User::All();
+		// $assignlists = Assigntasks::All();
+		// $tasks = Tasks::where('active', 1)->get();
+		// $ourtasks = Assigntasks::where('userid', $request->user()->id)->get();
 		
-		return view("tasks.assigntaskpannel")
-		->with("users", $users)
-		->with("assignlists", $assignlists)
-		->with("tasks", $tasks)
-		->with("ourtasks", $ourtasks);
+
+		
+		
+		// return view("tasks.assigntaskpannel")
+		// ->with("users", $users)
+		// ->with("assignlists", $assignlists)
+		// ->with("tasks", $tasks)
+		// ->with("ourtasks", $ourtasks);
 	}
 
 	
@@ -57,12 +61,13 @@ class AssigntasksController extends Controller {
 
 		$tasks = Tasks::where('active',1)->get();
 	
+		$user = User::find(Input::get('userid'));
 
 		foreach($tasks as $task)
 		{
 
 
-			if (Input::get($task->id) === '1')
+			if (Input::get($task->id) === '1') //checked
 			{
 							
 
@@ -78,9 +83,35 @@ class AssigntasksController extends Controller {
 				 {
 
 				 	$assigntask = new Assigntasks();
-				$assigntask->taskid = $task->id;
-				$assigntask->userid = Input::get('userid');
-				$assigntask->save();
+					$assigntask->taskid = $task->id;
+					$assigntask->userid = Input::get('userid');
+					$assigntask->save();
+
+
+
+					$data = array(
+			        'name' => $user->name,
+			        'email' => $user->email,
+			        'title' => $task->tasktitle,
+			        'taskdate' => $task->taskdate,
+			       	'deadline' => $task->deadline,
+			       	'budget' => $task->budget,
+			        'messagecontent' => $task->content,
+			   		 );
+
+					
+					// var_dump($data);
+					// die();
+			    	Mail::send('emails.layoutmail', $data, function ($message) use ($data){
+
+
+
+			        $message->from('stieducontact@gmail.com', 'STI Manager');
+
+			        $message->to($data['email'])->subject('STI Manager | New Task Assign')
+			        										->replyTo('stieducontact@gmail.com');
+
+			    });
 
 
 				 }
@@ -110,7 +141,7 @@ class AssigntasksController extends Controller {
 		
 
 		
-		return redirect()->route("assigntasks.index");
+		return redirect()->route("tasks.index");
 	}
 
 	/**
@@ -169,7 +200,7 @@ class AssigntasksController extends Controller {
 		
 		Assigntasks::destroy($id);
 
-		return redirect()->route("assigntasks.index");
+		return redirect()->route("tasks.index");
 	}
 
 	public function rrmdir($dir) {

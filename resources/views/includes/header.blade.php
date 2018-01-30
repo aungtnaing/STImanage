@@ -58,11 +58,9 @@
                             <a href="/todolistmanager">staff todolist</a>
                         </li>
                         <li>
-                            <a href="/tasks">create task</a>
+                            <a href="/tasks">task manager</a>
                         </li>
-                        <li>
-                            <a href="/assigntasks">assign task</a>
-                        </li>
+                       
 
                         <li>
                             <a href="#">Tasks feedback <span class="fa arrow"></span></a>

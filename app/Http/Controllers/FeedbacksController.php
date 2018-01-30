@@ -8,7 +8,7 @@ use App\Tasks;
 use App\Taskissues;
 use App\User;
 use DB;
-
+use Mail;
 use File;
 use Input;
 
@@ -58,14 +58,18 @@ class FeedbacksController extends Controller {
 		
 
 
+		$task = Tasks::find($request->input("taskid"));
 
+		$usermanager = User::find($task->userid);
 
+		$user = User::find($request->user()->id);
 
 		$this->validate($request,[
 			'feedbackdate' => 'required',
 			'feedback' => 'required',
 
 			]);
+
 
 
 		$feebackitem = new Taskissues();
@@ -81,6 +85,31 @@ class FeedbacksController extends Controller {
 
 		
 		$feebackitem->save();
+
+		
+					$data = array(
+			        'name' => $usermanager->name,
+			        'email' => $usermanager->email,
+			        'title' => $task->tasktitle,
+			        'date' => $request->input("feedbackdate"),
+			       	'costs' => $request->input("costs"),
+			        'messagecontent' => $request->input("feedback"),
+			        'sender' => $user->name,
+			   		 );
+
+		
+					
+		Mail::send('emails.replylayoutmail', $data, function ($message) use ($data){
+
+
+
+			        $message->from('stieducontact@gmail.com', $data['sender']);
+
+			        $message->to($data['email'])->subject('Report : Task')
+			        										->replyTo('stieducontact@gmail.com');
+
+			    });
+
 		return redirect()->route("feedbackissue", $request->input("taskid"));
 	}
 
@@ -158,15 +187,17 @@ class FeedbacksController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($id,Request $request)
 	{
 		//
 
 		
 		
-		Assigntasks::destroy($id);
+		Taskissues::destroy($id);
 
-		return redirect()->route("assigntasks.index");
+		
+
+		return redirect()->route("feedbackissue", $request->input("taskid"));
 	}
 
 	public function rrmdir($dir) {

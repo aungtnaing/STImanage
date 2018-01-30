@@ -57,7 +57,7 @@
 							<div class="form-group">
 								<label>Costs :</label>
 
-								<input type="text" class="form-control" name="costs" placeholder="Enter stitle" value="{{ $feedback->costs }}">
+								<input type="text" class="form-control" name="costs" placeholder="Enter costs" value="{{ $feedback->costs }}">
 
 							</div> 
 
