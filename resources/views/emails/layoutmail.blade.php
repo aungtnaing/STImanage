@@ -7,13 +7,12 @@
 
 <div>Dear {!! $name !!},<br>
   
-   	Date : {!! $taskdate !!} <br>
    	Task : {!! $title !!} <br>
-    	{!! $messagecontent !!} <br>
-   	
-    DeadLine : {!! $deadline !!} <br>
-    Budget : {!! $budget !!} <br>
-    Regards, <br>
+   	You have new notification in <br>
+
+   	http://172.104.179.78/home
+
+   	Regards, <br>
     STI Manager
 
   

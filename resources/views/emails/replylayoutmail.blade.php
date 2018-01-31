@@ -7,10 +7,8 @@
 
 <div>Dear {!! $name !!},<br>
   	Task {!! $title !!} <br>
-   	Date : {!! $date !!} <br>
-    	{!! $messagecontent !!} <br>
- 
-    Costs : {!! $costs !!} <br>
+   	You have a new notification from reporter in
+   	http://172.104.179.78/home
     Regards, <br>
    {{ $sender }}
 

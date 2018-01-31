@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Tasks;
 use App\Assigntasks;
+use App\Taskissues;
 use DB;
 use App\User;
 use File;
@@ -256,6 +257,8 @@ class TasksController extends Controller {
 		
 		
 		Tasks::destroy($id);
+		Assigntasks::where('taskid', $id)->delete();
+		Taskissues::where('taskid', $id)->delete();
 
 		return redirect()->route("tasks.index");
 	}
